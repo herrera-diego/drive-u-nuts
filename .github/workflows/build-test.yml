@@ -1,0 +1,34 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install gtest
+      run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make 
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get install libgcrypt-dev
+    - uses: actions/checkout@v2   
+    
+    - name: Build
+      run:  |
+        cd code
+        make all    
+    - name: Build tests
+      run: |
+        cd code
+        make test     
+    - name: Execute tests
+      run: |
+        cd code
+        ./bin/unittest
