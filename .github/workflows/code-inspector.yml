@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Check code meets quality standards
       id: code-inspector
-      uses: codeinspectorio/github-action@v1
+      uses: codeinspectorio/github-action@master
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         code_inspector_api_token: ${{ secrets.CODE_INSPECTOR_API_TOKEN }}
